@@ -6,7 +6,6 @@ const reviewsRouter = require("./routes/reviews");
 
 // express app initialization
 const app = express();
-
 //Midelwares
 app.use(express.json());
 app.use("/api/v1/reviews", reviewsRouter);

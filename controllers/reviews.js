@@ -50,11 +50,6 @@ const filterReviews = async (req, res, next) => {
   try {
     const { appID, appStoreName, rating, countryName } = req.query;
 
-    console.log(
-      appID + "  appStoreName",
-      appStoreName + " rating" + rating + "  countryName" + countryName
-    );
-
     const filtredReviews = await Review.findAll({
       // thes brings into consideration if the query parameters are undefined
       where: {
@@ -121,6 +116,10 @@ const addReview = async (req, res, next) => {
   try {
     // review to add
     const reviewToAdd = req.body;
+
+    // create table if it doesn't exist
+    await Review.sync({ force: false });
+    //
     const reviewAdded = await Review.create(reviewToAdd);
     //
     return res.status(201).json({
